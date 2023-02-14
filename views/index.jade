@@ -136,28 +136,27 @@ html
         .form-holder
           .form-content
             .form-items
-              h3 Register Today
-              p Fill in the data below.
+              h3 Registro de paqueteria
               form.requires-validation(novalidate='')
                 .col-md-12
-                  input.form-control(type='text', name='name', placeholder='Full Name', required='')
+                  input.form-control(type='text', name='name', placeholder='Nombre', required='')
                   .valid-feedback Username field is valid!
                   .invalid-feedback Username field cannot be blank!
                 .col-md-12
-                  input.form-control(type='email', name='email', placeholder='E-mail Address', required='')
+                  input.form-control(type='number', name='email', placeholder='Latitud', required='')
                   .valid-feedback Email field is valid!
                   .invalid-feedback Email field cannot be blank!
                 .col-md-12
                   select.form-select.mt-3(required='')
-                    option(selected='', disabled='', value='') Position
+                    option(selected='', disabled='', value='') Longitud
                     option(value='jweb') Junior Web Developer
                     option(value='sweb') Senior Web Developer
                     option(value='pmanager') Project Manager
                   .valid-feedback You selected a position!
                   .invalid-feedback Please select a position!
                 .col-md-12
-                  input.form-control(type='password', name='password', placeholder='Password', required='')
+                  input.form-control(type='text', name='password', placeholder='Precio', required='')
                   .valid-feedback Password field is valid!
                   .invalid-feedback Password field cannot be blank!
                 .form-button.mt-3
-                  button#submit.btn.btn-primary(type='submit') Register
+                  button#submit.btn.btn-primary(type='submit') Registrar
