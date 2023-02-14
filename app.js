@@ -6,11 +6,17 @@
 require('dotenv').config();         // para poder acceder a la información en .env
 const express = require('express');
 const server = express();              // inicializar un servidor de express para recibir requests
+const indexRouter = require('./routes/index');
+const path = require('path');
 
 const port = process.env.PORT || 3010;   // puerto donde se corre el servidor. Todo servicio en tu compu requiere un servidor
 
 // Dependencias
 const cors = require('cors');
+
+// view engine setup
+server.set('views', path.join(__dirname, 'views'));
+server.set('view engine', 'jade');
 
 // Connexión a base de datos
 const mongoose = require("mongoose");
@@ -32,21 +38,21 @@ server.use(express.json());        // el formato de los datos usados es JSON
 // Modelos de la Base de Datos
 const Tweet = require('./models/tweet.js');
 
+const bodyParser = require('body-parser');
+server.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+
 /* ---RUTAS--- */
 // GET: dame información
 // POST: te mando información
 
-// Dirección base
-server.get('/', function (req, res) {
-    res.send("Bienvenido a la API de Twitter");
-});
+server.use('/', indexRouter);
 
 // Obtener todos los tweets
-server.get('/feed', function(req, res) {
+server.get('/dashboard', function(req, res) {
     // busca todos los tweets, cuando los tengas regrésamelos. Si hubo algún error, notificalo.
     Tweet.find()
     .then((results) => {
-        res.json(results);
+        res.render('dashboard', {results});
     })
     .catch((err) => {
         console.log("Hubo error: " + err)
@@ -56,18 +62,19 @@ server.get('/feed', function(req, res) {
 
 // Subir un nuevo tweet
 server.post('/', function(req, res) {
-
     // Obten la información recibida en la request
     const newTweet = new Tweet({
-        username: req.body.username,
-        tweet: req.body.tweet,
-        posted: req.body.posted,
-    }); 
+        userId: req.body.name,
+        lat: req.body.latitud,
+        lon: req.body.longitud,
+        price: req.body.precio,
+    });
 
+    console.log(req);
     // Guardalo a la base de datos, si hay problema notifícalo
     newTweet.save()
     .then(() => {
-        res.status(201).send("Creado exitosamente:" + newTweet);
+        res.redirect('dashboard');
     })
     .catch((err)=> {
         console.log("Hubo error: " + err);

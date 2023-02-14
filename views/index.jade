@@ -137,14 +137,14 @@ html
           .form-content
             .form-items
               h3 Registro de paqueteria
-              form.requires-validation(novalidate='')
+              form(action='/', method= 'post')
                 .col-md-12
-                  input.form-control(type='text', name='name', placeholder='Nombre', required='')
+                  input(type='text', value= '', id='name', name='name', placeholder='Nombre')
                 .col-md-12
-                  input.form-control(type='text', name='latitud', placeholder='Latitud', required='')
+                  input(type='text', value= '', name='latitud', placeholder='Latitud')
                 .col-md-12
-                  input.form-control(type='text', name='longitud', placeholder='Longitud', required='')
+                  input(type='text', value= '', name='longitud', placeholder='Longitud')
                 .col-md-12
-                  input.form-control(type='text', name='precio', placeholder='Precio', required='')
+                  input(type='text', value= '', name='precio', placeholder='Precio')
                 .form-button.mt-3
-                  button#submit.btn.btn-primary(type='submit') Registrar
+                  input#submit.btn.btn-primary(type='submit' value='Registrar')

@@ -5,8 +5,7 @@ const tweetSchema = new mongoose.Schema({
     userId: String,
     lat: String,
     price: String,
-    lon: String,
-    posted: {type: Date, default: Date.now()},
+    lon: String
 })
 
 // Exportar un modelo utilizable del esquema

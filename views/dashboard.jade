@@ -16,10 +16,9 @@ block content
                   th Longitud
                   th Precio
               tbody
-                | {{#each results}}
-                tr
-                  td {{this.name}}
-                  td {{this.lat}}
-                  td {{this.lon}}
-                  td {{this.price}}
-                |                 {{/each}}
+                each result, i in results
+                  tr
+                    td #{result.userId}
+                    td #{result.lat}
+                    td #{result.lon}
+                    td #{result.price}
